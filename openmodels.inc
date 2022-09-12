@@ -1,7 +1,7 @@
 /*
-    @Version 0.1
-    @Date 11/09/2022 (BR)
-    @Last Edit 20:08 (BR - RJ)
+    @Version 0.3
+    @Date 12/09/2022 (BR)
+    @Last Edit 17:48 (BR - RJ)
     @Author Victor Ghost
 
 */
@@ -10,7 +10,7 @@
     #endinput
 #else 
     #define _openmodels_included
-    #define _openmodels_version 0.1
+    #define _openmodels_version 0.3
 #endif
 
 #if !defined _samp_included
@@ -70,13 +70,14 @@ public OnOpenModelsInit()
     if(cache_num_rows())
     {
         new rows = cache_num_rows();
-        new baseid, newid, txd[32], dff[32];
+        new baseid, newid, name[32], dff[32], txd[32];
         for(new i = 0; i < rows; i++)
         {
             newid = GetNewModelId();
             cache_get_value_int(i, "baseid", baseid);
-            cache_get_value_name(i, "txd", txd);
-            cache_get_value_name(i, "dff", dff);
+            cache_get_value_name(i, "name", name);
+            format(dff, sizeof(dff), "%s.dff", name);
+            format(txd sizeof(txd), "%s.txd", name);
             AddCharModel(baseid, newid, dff, txd);
             printf("baseid : %d, newid : %d, txd : %s, dff : %s", baseid, newid, txd, dff);
         }

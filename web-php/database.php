@@ -1,5 +1,5 @@
 <?php
-const WEBSERVER_VERSION = "0.3";
+const WEBSERVER_VERSION = "0.4";
 const DATABASE = "openmodels";
 const HOSTNAME = "127.0.0.1";
 const USERNAME = "root";

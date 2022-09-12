@@ -1,5 +1,7 @@
 <?php
     $GLOBAL_BASEID = 0; // Change the GLOBAL_BASEID to have one different baseid to global inserts
+    $MODELS_PATH = "../models/"; // Where mods will copyed for be add in samp/open.mp server
+    $WEB_PATH = "./assets/"; // Where Mods will be saved to downloadable content to players (Webserver)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +21,8 @@
             {
                 $tmp = $_FILES['files']['tmp_name'][$i];
                 $name = $_FILES['files']['name'][$i];
-                $path = "../models/" . $name;
-                $webpath = "./assets/" . $name;
+                $path = $MODELS_PATH . $name;
+                $webpath = $WEB_PATH . $name;
                 move_uploaded_file($tmp, $path);
                 copy($path, $webpath);
                 mysqli_query($connection, "INSERT INTO `models` (name, baseid) VALUES ('$name', '$GLOBAL_BASEID');");
