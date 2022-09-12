@@ -1,0 +1,2 @@
+Folder 'assets' should be inside 'web-php' to work properly. You can rename by the way, just change in 'index.php';
+'assets' Folder is designed to downloadable content by the client, should be inside C:\\xampp\htdocs\ (if using xampp)
