@@ -35,7 +35,7 @@
 #define MAX_MODELS (30000)
 #define MIN_MODELS (20001)
 
-new bool:ModelUsed[MAX_MODELS];
+new bool:ModelUsed[MAX_MODELS - MIN_MODELS];
 
 stock InitOpenModels()
 {
@@ -44,7 +44,7 @@ stock InitOpenModels()
     new MySQL:openmodels_connection = mysql_connect(OPENHOSTNAME, OPENUSERNAME, OPENPASSWORD, OPENDATABASE);
     if(mysql_errno()) printf("[MySQL - open.models loader]: ERROR To Connect to the database! Please Check Tutorials or contact administrator to possible errors. Error Code %d", mysql_errno());
     new query[144];
-    mysql_format(openmodels_connection, query, sizeof(query), "SELECT * FROM `%s`;", OPENTABLE);
+    mysql_format(openmodels_connection, query, sizeof(query), "SELECT * FROM `%s` LIMIT %d;", OPENTABLE, (MAX_MODELS - MIN_MODELS));
     mysql_tquery(openmodels_connection, query, "OnOpenModelsInit");
 
     return 1;
@@ -52,13 +52,13 @@ stock InitOpenModels()
 
 static stock GetNewModelId()
 {
-    for(new i = MIN_MODELS; i < MAX_MODELS; i++)
+    for(new i; i < (MAX_MODELS - MIN_MODELS); i++)
     {
         if(ModelUsed[i] == true) continue;
         else
         {
             ModelUsed[i] = true;
-            return i;
+            return (i + MIN_MODELS);
         }
     }
     return INVALID_OMODEL_ID;
