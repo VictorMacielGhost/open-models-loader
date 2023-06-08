@@ -25,7 +25,7 @@
                 $webpath = $WEB_PATH . $name;
                 move_uploaded_file($tmp, $path);
                 copy($path, $webpath);
-                mysqli_query($connection, "INSERT INTO `models` (name, baseid) VALUES ('$name', '$GLOBAL_BASEID');");
+                mysqli_query($connection, "INSERT INTO `models` (name, baseid, model_type) VALUES ('$name', '$GLOBAL_BASEID', '0');");
                 printf("Model <b>%s</b> Inserted in database as weburl <b>%s</b> and saved in <b>%s</b> to be loaded in the MP.<br>", $name, $webpath, $path);
             }
         }
